@@ -1,0 +1,495 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Adcraft Studio — Healthcare Marketing | Concept 03</title>
+<meta name="description" content="Healthcare marketing that grows the practice without putting it at risk. A connected marketing system built inside AHPRA's advertising guidelines.">
+<link rel="icon" href="https://cdn.prod.website-files.com/68d35b742e1dd12ea5dc12ae/699e356897e159ba26b129f2_adcraft-favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --black:#050505;
+  --paper:#f4f1ec;
+  --white:#fff;
+  --ink:#16140f;
+  --muted:#74706a;
+  --line:#e4e0d8;
+  --line-2:#eeebe4;
+  --grid:rgba(5,5,5,.035);
+  --ease:cubic-bezier(.22,1,.36,1);
+  --sans:'Inter',system-ui,sans-serif;
+  --serif:'Instrument Serif',Georgia,serif;
+  --mono:'Roboto Mono',ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  font-family:var(--sans);background:var(--white);color:var(--black);
+  font-size:16px;line-height:1.6;letter-spacing:-.011em;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+  background-size:58px 58px;background-position:center top;
+}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+::selection{background:var(--black);color:var(--white)}
+.wrap{width:min(100% - 3rem,1680px);margin-inline:auto}
+.mono{font-family:var(--mono);text-transform:uppercase;font-size:.68rem;letter-spacing:.12em;color:var(--muted);font-weight:500}
+.serif{font-family:var(--serif);font-weight:400;font-style:italic;letter-spacing:0}
+.tag{font-family:var(--mono);font-size:.62rem;letter-spacing:.13em;text-transform:uppercase;color:var(--muted)}
+
+/* nav */
+.nav{position:fixed;inset:.6rem 0 auto;z-index:60}
+.nav-in{width:min(100% - 3rem,1680px);margin-inline:auto;display:flex;align-items:center;justify-content:space-between;height:54px;padding:0 .65rem 0 1rem;gap:1rem;background:rgba(255,255,255,.82);backdrop-filter:blur(14px);border:1px solid var(--line);border-radius:13px;transition:box-shadow .35s var(--ease),background .35s}
+.nav.scrolled .nav-in{background:rgba(255,255,255,.92);box-shadow:0 10px 30px rgba(5,5,5,.07)}
+.brand{display:inline-flex;align-items:center;gap:.7rem;flex:none}
+.brand-mark{width:1.45rem;height:1.45rem;border-radius:5px;background:url('assets/brand-gradient.jpg') center/cover;box-shadow:0 0 0 1px var(--line) inset;flex:none}
+.logo-img{height:1.34rem;width:auto;display:block}
+.brand-tag{font-family:var(--mono);font-size:.58rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);font-weight:500;white-space:nowrap}
+.foot-logo{height:1.5rem}
+.nav-right{display:flex;align-items:center;gap:1.5rem}
+.nav-links{display:flex;gap:1.5rem;font-size:.83rem;font-weight:600;color:#3a3833}
+.nav-links a{position:relative;transition:color .2s;display:inline-flex;align-items:center;gap:.32rem}.nav-links a:hover,.nav-links a.active{color:var(--black)}
+.nav-links a::after{content:'';position:absolute;left:0;bottom:-3px;width:0;height:1px;background:var(--black);transition:width .3s var(--ease)}
+.nav-links a:hover::after,.nav-links a.active::after{width:100%}
+.nbadge{display:inline-flex;align-items:center;justify-content:center;min-width:.98rem;height:.98rem;padding:0 .25rem;border-radius:99px;background:#ff4a33;color:#fff;font-family:var(--mono);font-size:.54rem;font-weight:500;line-height:1}
+.burger{display:flex;width:40px;height:34px;border:1px solid var(--line);border-radius:8px;background:#fff;cursor:pointer;flex-direction:column;align-items:center;justify-content:center;gap:5px;padding:0;flex:none;transition:background .25s}
+.burger:hover{background:var(--paper)}
+.burger span{display:block;width:17px;height:1.7px;background:var(--black);border-radius:2px;transition:transform .3s var(--ease)}
+.burger.open span:nth-child(1){transform:translateY(3.35px) rotate(45deg)}
+.burger.open span:nth-child(2){transform:translateY(-3.35px) rotate(-45deg)}
+.mobile-menu{width:min(100% - 3rem,1680px);margin:.5rem auto 0;background:rgba(255,255,255,.97);backdrop-filter:blur(16px);border:1px solid var(--line);border-radius:13px;padding:.6rem;display:flex;flex-direction:column;gap:.1rem;transform:translateY(-8px);opacity:0;pointer-events:none;transition:transform .3s var(--ease),opacity .3s}
+.mobile-menu.open{transform:none;opacity:1;pointer-events:auto}
+.mobile-menu .mm-label{font-family:var(--mono);font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);padding:.5rem .8rem .3rem}
+.mobile-menu a{font-size:.98rem;font-weight:600;color:var(--black);padding:.8rem .8rem;border-radius:8px;display:flex;justify-content:space-between;align-items:center}
+.mobile-menu a:hover{background:var(--paper)}
+.mobile-menu .mm-cta{margin-top:.3rem;background:var(--black);color:#fff;text-align:center;justify-content:center;display:inline-flex;align-items:center;gap:.5rem}
+@media(max-width:840px){.nav-links{display:none}}
+@media(max-width:560px){.brand-tag{display:none}}
+
+/* hero bento */
+.hero{padding:7.2rem 0 3rem}
+.bento{display:grid;grid-template-columns:repeat(12,1fr);grid-auto-rows:minmax(0,auto);gap:.85rem}
+.tile{border:1px solid var(--line);border-radius:16px;background:var(--white);padding:1.6rem;position:relative;overflow:hidden}
+.tile .corner{position:absolute;top:.85rem;right:1rem}
+.t-hero{grid-column:span 8;display:flex;flex-direction:column;justify-content:space-between;min-height:340px;background:var(--paper)}
+.t-hero .htop{display:flex;align-items:center;gap:.6rem;margin-bottom:auto}
+.t-hero .dot{width:.42rem;height:.42rem;border-radius:50%;background:#5fb877}
+.t-hero h1{font-size:clamp(1.9rem,1.25rem + 2.4vw,3rem);line-height:1.07;font-weight:700;letter-spacing:-.035em;margin:1.6rem 0 1.1rem;max-width:17ch}
+.t-hero p{font-size:1rem;color:#3f3c37;max-width:50ch;line-height:1.55}
+.t-side{grid-column:span 4;display:grid;grid-template-rows:1fr auto;gap:.85rem}
+.t-compliance{border:1px solid var(--line);border-radius:16px;padding:1.4rem;background:var(--black);color:var(--paper);position:relative;overflow:hidden}
+.t-compliance .cg{position:absolute;inset:auto -25% -45% auto;width:18rem;height:15rem;border-radius:50%;filter:blur(40px) saturate(1.05);opacity:.6;background:url('assets/brand-gradient.jpg') center/cover;mix-blend-mode:screen}
+.t-compliance .tag{color:rgba(244,241,236,.55)}
+.t-compliance h3{font-size:1.05rem;font-weight:650;letter-spacing:-.02em;margin:.9rem 0 .5rem;position:relative}
+.t-compliance p{font-size:.84rem;color:rgba(244,241,236,.66);line-height:1.5;position:relative}
+.t-cta{border:1px solid var(--line);border-radius:16px;padding:1.3rem;display:flex;flex-direction:column;justify-content:space-between;gap:1rem;background:var(--white)}
+.t-cta .btn{width:100%;justify-content:center}
+.btn{display:inline-flex;align-items:center;gap:.5rem;background:var(--black);color:var(--white);font-weight:600;font-size:.9rem;padding:.8rem 1.2rem;border-radius:9px;transition:transform .3s var(--ease),box-shadow .3s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(5,5,5,.16)}
+.btn .arw{transition:transform .3s var(--ease)}.btn:hover .arw{transform:translate(3px,-3px)}
+.t-stat{grid-column:span 4;display:flex;flex-direction:column;justify-content:space-between;min-height:142px}
+.t-stat strong{font-size:clamp(1.9rem,1.4rem + 1.5vw,2.5rem);font-weight:700;letter-spacing:-.04em;line-height:1;margin-top:1rem}
+.t-stat span{font-size:.82rem;color:var(--muted);line-height:1.4;margin-top:.5rem}
+@media(max-width:860px){.t-hero{grid-column:1/-1}.t-side{grid-column:1/-1;grid-template-rows:auto auto;grid-template-columns:1fr 1fr}.t-stat{grid-column:span 12}}
+@media(max-width:560px){.t-side{grid-template-columns:1fr}.t-stat{grid-column:1/-1}}
+/* page-load intro — runs only when frames are live (html.anim-ready) */
+@keyframes introUp{0%{opacity:0;transform:translateY(20px)}100%{opacity:1;transform:none}}
+html.anim-ready .bento>*{opacity:0;animation:introUp .8s var(--ease) forwards}
+html.anim-ready .bento>*:nth-child(1){animation-delay:.12s}
+html.anim-ready .bento>*:nth-child(2){animation-delay:.22s}
+html.anim-ready .bento>*:nth-child(3){animation-delay:.32s}
+html.anim-ready .bento>*:nth-child(4){animation-delay:.4s}
+html.anim-ready .bento>*:nth-child(5){animation-delay:.48s}
+html.anim-ready .bento>*:nth-child(6){animation-delay:.56s}
+html.anim-ready .nav{opacity:0;animation:introUp .7s var(--ease) .05s forwards}
+
+/* section */
+.section{padding:4.8rem 0;position:relative}
+.sec-head{display:flex;justify-content:space-between;align-items:flex-end;gap:2rem;flex-wrap:wrap;margin-bottom:2.4rem;padding-bottom:1.4rem;border-bottom:1px solid var(--line)}
+.sec-head .sh-l{max-width:24ch}
+.sec-num{font-family:var(--mono);font-size:.68rem;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem}
+.h2{font-size:clamp(1.5rem,1.18rem + 1.3vw,2.2rem);line-height:1.1;font-weight:700;letter-spacing:-.03em}
+.sec-head .sh-r{font-size:.96rem;color:#4a473f;max-width:42ch;line-height:1.55}
+
+/* AHPRA spec rows */
+.spec{border:1px solid var(--line);border-radius:16px;overflow:hidden;background:var(--white)}
+.spec-row{display:grid;grid-template-columns:.5fr 1.5fr;gap:1.5rem;padding:1.5rem 1.7rem;border-bottom:1px solid var(--line-2);align-items:start;transition:background .3s}
+.spec-row:last-child{border-bottom:0}
+.spec-row:hover{background:#faf9f6}
+.spec-row .sk{font-family:var(--mono);font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);padding-top:.2rem}
+.spec-row .sv{font-size:.98rem;color:#34312c;line-height:1.6}
+.spec-row .sv b{font-weight:650;color:var(--black)}
+@media(max-width:680px){.spec-row{grid-template-columns:1fr;gap:.5rem}}
+
+/* problem panels */
+.panels{display:grid;grid-template-columns:1fr 1fr;gap:.85rem}
+.panel{border:1px solid var(--line);border-radius:16px;background:var(--white);overflow:hidden}
+.panel.alt{background:var(--paper)}
+.panel-h{display:flex;align-items:center;justify-content:space-between;padding:1.2rem 1.5rem;border-bottom:1px solid var(--line)}
+.panel-h .ph-t{font-family:var(--mono);font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.panel-h .ph-x{font-family:var(--mono);font-size:.66rem;color:#c0392b}
+.panel.alt .ph-x{color:#2f7d3f}
+.pbody{padding:.4rem 1.5rem 1.3rem}
+.pitem{padding:1.1rem 0;border-bottom:1px solid var(--line-2);display:grid;grid-template-columns:1.7rem 1fr;gap:.4rem 0}
+.pitem:last-child{border-bottom:0}
+.pitem .pn{font-family:var(--mono);font-size:.72rem;color:var(--muted);grid-row:span 2}
+.pitem h4{font-size:.97rem;font-weight:650;letter-spacing:-.02em}
+.pitem p{font-size:.87rem;color:#56524c;line-height:1.5}
+.intro-line{font-size:1rem;color:#4a473f;max-width:64ch;line-height:1.58;margin:-1rem 0 1.8rem}
+@media(max-width:760px){.panels{grid-template-columns:1fr}}
+
+/* services bento */
+.svc-bento{display:grid;grid-template-columns:repeat(6,1fr);gap:.85rem}
+.scell{border:1px solid var(--line);border-radius:16px;background:var(--white);padding:1.5rem;min-height:188px;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden;transition:transform .4s var(--ease),box-shadow .4s,border-color .4s}
+.scell:hover{transform:translateY(-4px);box-shadow:0 18px 44px rgba(5,5,5,.09);border-color:#cfcabf}
+.scell .sc-no{font-family:var(--mono);font-size:.7rem;letter-spacing:.08em;color:var(--muted)}
+.scell h3{font-size:1.12rem;font-weight:700;letter-spacing:-.02em;margin:1rem 0 .5rem}
+.scell p{font-size:.86rem;color:#56524c;line-height:1.5}
+.scell.wide{grid-column:span 3}
+.scell.std{grid-column:span 3}
+.scell.tri{grid-column:span 2}
+.scell.feature{grid-column:span 6;background:var(--black);color:var(--paper);min-height:auto;flex-direction:row;align-items:center;justify-content:space-between;gap:1.5rem;flex-wrap:wrap}
+.scell.feature h3{color:var(--paper);margin:0;font-size:1.25rem;max-width:22ch}
+.scell.feature p{color:rgba(244,241,236,.66);max-width:40ch;margin:0}
+.scell.feature .fg{position:absolute;inset:auto -12% -65% auto;width:26rem;height:20rem;border-radius:50%;filter:blur(52px) saturate(1.05);opacity:.5;background:url('assets/brand-gradient.jpg') center/cover;mix-blend-mode:screen}
+.scell::after{content:'';position:absolute;left:0;bottom:0;height:2px;width:0;background:linear-gradient(90deg,#5fa5ff,#ff8a3d,#ff3d8c);transition:width .45s var(--ease)}
+.scell:not(.feature):hover::after{width:100%}
+@media(max-width:860px){.scell.wide,.scell.std{grid-column:span 6}.scell.tri{grid-column:span 3}}
+@media(max-width:560px){.svc-bento{grid-template-columns:1fr}.scell,.scell.wide,.scell.std,.scell.tri,.scell.feature{grid-column:1/-1}.scell.feature{flex-direction:column;align-items:flex-start}}
+
+/* process bar */
+.pbar{display:grid;grid-template-columns:repeat(4,1fr);gap:.85rem}
+.pstep{border:1px solid var(--line);border-radius:16px;background:var(--white);padding:1.5rem;position:relative;overflow:hidden}
+.pstep .ptrack{position:absolute;top:0;left:0;right:0;height:3px;background:var(--line-2)}
+.pstep .pfill{position:absolute;top:0;left:0;height:3px;background:var(--black)}
+.pstep.live .pfill{background:linear-gradient(90deg,#5fa5ff,#ff8a3d,#ff3d8c)}
+.pstep .pn{font-family:var(--mono);font-size:.72rem;letter-spacing:.08em;color:var(--muted);margin-top:.4rem}
+.pstep h3{font-size:1.04rem;font-weight:700;letter-spacing:-.02em;margin:1rem 0 .55rem}
+.pstep p{font-size:.85rem;color:#56524c;line-height:1.52}
+.pstep .badge{display:inline-block;font-family:var(--mono);font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;color:#c25a1f;border:1px solid #f0cba8;border-radius:99px;padding:.2rem .5rem;margin-top:.9rem}
+.t-photo{grid-column:span 12;padding:0;height:clamp(190px,24vw,280px);position:relative;overflow:hidden}
+.t-photo img{position:absolute;inset:-9% 0;width:100%;height:118%;object-fit:cover;display:block;filter:saturate(.95) contrast(1.02);will-change:transform}
+.t-photo figcaption{position:absolute;left:1rem;bottom:1rem;background:rgba(5,5,5,.72);backdrop-filter:blur(8px);border-radius:8px;padding:.5rem .8rem}
+.t-photo figcaption .tag{color:rgba(244,241,236,.82)}
+@media(max-width:860px){.pbar{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.pbar{grid-template-columns:1fr}}
+
+/* results data tiles */
+.dash{display:grid;grid-template-columns:repeat(12,1fr);gap:.85rem}
+.dcard{grid-column:span 6;border:1px solid var(--line);border-radius:18px;background:var(--white);padding:1.9rem;position:relative;overflow:hidden}
+.dcard .dg{position:absolute;inset:auto -14% -50% auto;width:23rem;height:18rem;border-radius:50%;filter:blur(54px);opacity:.5;background:radial-gradient(circle at 36% 38%,rgba(95,165,255,.5),transparent 58%),radial-gradient(circle at 66% 54%,rgba(255,138,61,.42),transparent 60%),radial-gradient(circle at 60% 78%,rgba(255,61,140,.36),transparent 60%);pointer-events:none}
+.dcard .dl{font-family:var(--mono);font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);position:relative}
+.dcard .dnum{font-size:clamp(2.4rem,1.7rem + 2.5vw,3.6rem);font-weight:700;letter-spacing:-.05em;line-height:1;margin:1.1rem 0 .3rem;position:relative}
+.dcard .dd{font-size:.92rem;color:#48453f;margin-bottom:1.2rem;position:relative}
+.dcard .dn{font-size:.88rem;color:#56524c;line-height:1.6;padding-top:1.2rem;border-top:1px solid var(--line-2);position:relative}
+.dmini{grid-column:span 4;border:1px solid var(--line);border-radius:18px;padding:1.6rem;display:flex;flex-direction:column;justify-content:space-between;background:var(--paper)}
+.dmini strong{font-size:clamp(1.8rem,1.4rem + 1.3vw,2.4rem);font-weight:700;letter-spacing:-.04em;line-height:1}
+.dmini span{font-size:.85rem;color:#56524c;line-height:1.45;margin-top:.6rem}
+.dwide{grid-column:span 8;border:1px solid var(--line);border-radius:18px;padding:1.6rem 1.8rem;display:flex;align-items:center;background:var(--white)}
+.dwide p{font-size:.98rem;color:#3c3a36;line-height:1.55}
+.dwide p b{color:var(--black);font-weight:650}
+.logos{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:.6rem 1.6rem;padding:1.4rem 0 0;margin-top:.4rem}
+.logos span{font-family:var(--mono);font-size:.7rem;letter-spacing:.05em;color:#9b968d;text-transform:uppercase}
+@media(max-width:760px){.dcard{grid-column:1/-1}.dmini{grid-column:span 12}.dwide{grid-column:span 12}}
+
+/* final cta */
+.cta{padding:5rem 0 6rem}
+.cta-box{border:1px solid var(--line);border-radius:22px;background:var(--paper);padding:2.8rem;display:grid;grid-template-columns:1.3fr .7fr;gap:2.5rem;align-items:center;position:relative;overflow:hidden}
+.cta-box .cg{position:absolute;inset:auto auto -60% -10%;width:32rem;height:23rem;border-radius:50%;filter:blur(62px);opacity:.5;background:radial-gradient(circle at 36% 38%,rgba(95,165,255,.5),transparent 58%),radial-gradient(circle at 66% 54%,rgba(255,138,61,.42),transparent 60%),radial-gradient(circle at 60% 78%,rgba(255,61,140,.36),transparent 60%);pointer-events:none}
+.cta-box h2{font-size:clamp(1.5rem,1.2rem + 1.3vw,2.15rem);font-weight:700;letter-spacing:-.03em;line-height:1.12;position:relative}
+.cta-box p{font-size:.98rem;color:#48453f;margin:1.1rem 0 1.7rem;max-width:48ch;line-height:1.6;position:relative}
+.ryan{display:flex;align-items:center;gap:1rem;position:relative;border:1px solid var(--line);border-radius:14px;padding:.8rem;background:rgba(255,255,255,.6)}
+.ryan img{width:60px;height:60px;border-radius:11px;object-fit:cover}
+.ryan .rn{font-weight:700;font-size:.96rem}
+.ryan .rm{font-size:.79rem;color:var(--muted)}
+@media(max-width:740px){.cta-box{grid-template-columns:1fr;padding:1.9rem}}
+
+/* footer */
+.footer{border-top:1px solid var(--line);padding:3.2rem 0 2.4rem;background:var(--white)}
+.foot-top{display:flex;justify-content:space-between;gap:2rem;flex-wrap:wrap;align-items:flex-start;margin-bottom:2.2rem}
+.foot-brand{font-weight:800;font-size:1.18rem;letter-spacing:-.03em}
+.foot-contact{font-size:.85rem;color:#48453f;line-height:1.7;text-align:right}
+.foot-legal{font-family:var(--mono);font-size:.64rem;letter-spacing:.07em;color:var(--muted);text-transform:uppercase;margin-bottom:1rem}
+.foot-disc{font-size:.77rem;color:#8a857d;line-height:1.62;max-width:80ch}
+@media(max-width:600px){.foot-contact{text-align:left}}
+
+/* selected work */
+.work-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:.95rem}
+.work-card{border:1px solid var(--line);border-radius:16px;overflow:hidden;background:var(--white);transition:transform .4s var(--ease),box-shadow .4s,border-color .4s}
+.work-card:hover{transform:translateY(-5px);box-shadow:0 22px 50px rgba(5,5,5,.1);border-color:#cfcabf}
+.work-img{aspect-ratio:3/2;overflow:hidden;background:#eceae4}
+.work-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .65s var(--ease)}
+.work-card:hover .work-img img{transform:scale(1.045)}
+.work-meta{padding:1rem 1.1rem 1.15rem;position:relative}
+.work-card{cursor:pointer}
+.work-meta::after{content:'↗';position:absolute;top:.95rem;right:1.05rem;font-size:.9rem;color:var(--muted);opacity:.5;transition:transform .3s var(--ease),opacity .3s}
+.work-card:hover .work-meta::after{opacity:1;transform:translate(2px,-2px);color:var(--black)}
+.work-meta .mono{font-size:.64rem;margin-bottom:.4rem}
+.work-meta h3{font-size:1.02rem;font-weight:700;letter-spacing:-.02em}
+@media(max-width:860px){.work-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.work-grid{grid-template-columns:1fr}}
+/* scroll reveal — subtle fade-up, the adcraftstudio.com.au feel */
+html.anim-ready .rv{opacity:0;transform:translateY(16px);transition:opacity .85s var(--ease),transform .85s var(--ease);will-change:opacity,transform}
+html.anim-ready .rv.in{opacity:1;transform:none}
+html.anim-ready .stg>*{opacity:0;transform:translateY(14px);transition:opacity .75s var(--ease),transform .75s var(--ease)}
+html.anim-ready .stg.in>*{opacity:1;transform:none}
+html.anim-ready .stg.in>*:nth-child(2){transition-delay:.06s}html.anim-ready .stg.in>*:nth-child(3){transition-delay:.12s}
+html.anim-ready .stg.in>*:nth-child(4){transition-delay:.18s}html.anim-ready .stg.in>*:nth-child(5){transition-delay:.24s}html.anim-ready .stg.in>*:nth-child(6){transition-delay:.3s}
+@media(prefers-reduced-motion:reduce){.t-photo img{will-change:auto}}
+</style>
+</head>
+<body>
+<script>/* enable animations only if the browser renders frames; else force content visible */(function(){var r=document.documentElement;r.classList.add('anim-ready');var fired=false;requestAnimationFrame(function(){fired=true});setTimeout(function(){if(fired)return;r.classList.remove('anim-ready');document.querySelectorAll('.hero-copy>*,.hero-media,.hero-meta,.hero-visual,.hero-strip,.nav,.rv,.stg>*,.bento>*,.head .wrap>*').forEach(function(el){el.style.opacity='1';el.style.transform='none';el.style.animation='none';});},250);})();</script>
+
+<nav class="nav" id="nav">
+  <div class="nav-in">
+    <a href="#" class="brand" aria-label="Adcraft — Marketing Agency">
+      <img src="assets/adcraft-logo.svg" class="logo-img" alt="Adcraft">
+      <span class="brand-tag">Marketing Agency</span>
+    </a>
+    <div class="nav-right">
+      <div class="nav-links">
+        <a href="https://adcraftstudio.com.au/marketing" target="_blank" rel="noopener">Marketing</a>
+        <a href="https://adcraftstudio.com.au/web-design" target="_blank" rel="noopener">Web</a>
+        <a href="https://adcraftstudio.com.au/branding" target="_blank" rel="noopener">Branding</a>
+        <a href="https://adcraftstudio.com.au/portfolio" target="_blank" rel="noopener">Work <span class="nbadge">3</span></a>
+        <a href="https://adcraftstudio.com.au/resources" target="_blank" rel="noopener">Blog</a>
+      </div>
+      <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false"><span></span><span></span></button>
+    </div>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <span class="mm-label">Menu</span>
+    <a href="https://adcraftstudio.com.au/marketing" target="_blank" rel="noopener">Marketing <span>↗</span></a>
+    <a href="https://adcraftstudio.com.au/web-design" target="_blank" rel="noopener">Web Design <span>↗</span></a>
+    <a href="https://adcraftstudio.com.au/branding" target="_blank" rel="noopener">Branding <span>↗</span></a>
+    <a href="https://adcraftstudio.com.au/portfolio" target="_blank" rel="noopener">Work <span>↗</span></a>
+    <a href="https://adcraftstudio.com.au/resources" target="_blank" rel="noopener">Blog <span>↗</span></a>
+    <a href="https://adcraftstudio.com.au/about-us" target="_blank" rel="noopener">About <span>↗</span></a>
+    <a href="https://adcraftstudio.com.au/contact-us" target="_blank" rel="noopener">Contact <span>↗</span></a>
+    <a href="mailto:enquiries@adcraftstudio.com.au" class="mm-cta">Book a call with Ryan <span class="arw">↗</span></a>
+  </div>
+</nav>
+
+<main>
+  <!-- HERO BENTO -->
+  <header class="hero">
+    <div class="wrap">
+      <div class="bento">
+        <div class="tile t-hero rv">
+          <div class="htop"><span class="dot"></span><span class="tag">Healthcare Marketing — AU</span></div>
+          <div>
+            <h1>Healthcare marketing that grows the practice <span class="serif">without putting it at risk.</span></h1>
+            <p>Adcraft Studio is an Australian agency working with private clinics and specialist practices across Australia. We build the marketing system that grows patient bookings.</p>
+          </div>
+        </div>
+        <div class="t-side">
+          <div class="t-compliance rv" style="transition-delay:.06s">
+            <div class="cg"></div>
+            <p class="tag">Compliance — AHPRA</p>
+            <h3>Written inside the guidelines, from the first line of copy</h3>
+            <p>Not checked after the fact. Built compliant from the start.</p>
+          </div>
+          <div class="t-cta rv" style="transition-delay:.1s">
+            <p class="mono">Next step / 15 min</p>
+            <a href="#contact" class="btn">Book a call with Ryan <span class="arw">↗</span></a>
+          </div>
+        </div>
+        <div class="tile t-stat rv" style="transition-delay:.14s"><p class="tag">King Street Dental</p><strong>65,000+</strong><span>patients a year, up from fewer than 1,000</span></div>
+        <div class="tile t-stat rv" style="transition-delay:.18s"><p class="tag">Wollongong Diagnostics</p><strong>11.6×</strong><span>growth in Google Search conversions / 3 yrs</span></div>
+        <div class="tile t-stat rv" style="transition-delay:.22s"><p class="tag">Across clients</p><strong>+50%</strong><span>average booking lift within six months</span></div>
+        <figure class="tile t-photo rv" style="transition-delay:.26s">
+          <img src="assets/team-meeting.jpg" alt="The Adcraft Studio team in a strategy session in Wollongong" loading="eager" data-parallax="0.06">
+          <figcaption><span class="tag">Inside the studio — Wollongong</span></figcaption>
+        </figure>
+      </div>
+    </div>
+  </header>
+
+  <!-- AHPRA DIFFERENCE -->
+  <section class="section" id="difference">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="sh-l"><p class="sec-num">01 / AHPRA-aware marketing</p><h2 class="h2">What sets a <span class="serif">genuine</span> healthcare agency apart.</h2></div>
+        <p class="sh-r">AHPRA's advertising rules sit underneath every piece of healthcare marketing we produce.</p>
+      </div>
+      <div class="spec rv">
+        <div class="spec-row"><span class="sk">The knowledge</span><p class="sv">We know which words trigger compliance review and which framings carry the same persuasive weight without doing so. We know how patient stories can be presented and <b>where the line sits on outcome claims.</b></p></div>
+        <div class="spec-row"><span class="sk">The method</span><p class="sv">That knowledge changes how the work is built. An agency without that background writes the copy first and checks the rules second. <b>We write copy that is already inside the lines</b> — because that is the only way to write healthcare copy well.</p></div>
+        <div class="spec-row"><span class="sk">The outcome</span><p class="sv">The result tends to perform better too, because copy written for how patients actually decide is more effective than copy written to look impressive.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROBLEM -->
+  <section class="section" id="problem">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="sh-l"><p class="sec-num">02 / Where the gap usually sits</p><h2 class="h2">What most healthcare websites do, and what they should do <span class="serif">instead.</span></h2></div>
+        <p class="sh-r">Within thirty seconds a patient forms an impression of whether this practice is right for them.</p>
+      </div>
+      <p class="intro-line rv">The website is either helping that impression form, or working against it.</p>
+      <div class="panels">
+        <div class="panel rv">
+          <div class="panel-h"><span class="ph-t">Most healthcare websites</span><span class="ph-x">✕ working against it</span></div>
+          <div class="pbody">
+            <div class="pitem"><span class="pn">01</span><h4>Sound clinical in the wrong way</h4><p>Technical and list-heavy, as if patients are reading a service catalogue. The practice's personality disappears into the formatting.</p></div>
+            <div class="pitem"><span class="pn">02</span><h4>Treat AHPRA as a reason to say nothing</h4><p>The regulation becomes an excuse for copy that is flat, cautious and interchangeable. AHPRA does not require that.</p></div>
+            <div class="pitem"><span class="pn">03</span><h4>Create friction in the booking path</h4><p>A form that asks too much. A calendar that hides availability. A system that pulls the patient away when they are ready to act.</p></div>
+          </div>
+        </div>
+        <div class="panel alt rv" style="transition-delay:.08s">
+          <div class="panel-h"><span class="ph-t">A well-built healthcare website</span><span class="ph-x">✓ helping it form</span></div>
+          <div class="pbody">
+            <div class="pitem"><span class="pn">01</span><h4>Speaks to people, inside AHPRA's limits</h4><p>Real room within the guidelines to communicate the practice's values, the care it offers and the experience patients can expect.</p></div>
+            <div class="pitem"><span class="pn">02</span><h4>Makes the trust cues visible early</h4><p>How the team is introduced, how credentials are presented — telling a patient within thirty seconds this is a serious, well-run practice.</p></div>
+            <div class="pitem"><span class="pn">03</span><h4>Makes booking the path of least resistance</h4><p>A booking system embedded directly in the website. Clear availability. A short form. Decision to booking, without leaving the page.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="section" id="services">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="sh-l"><p class="sec-num">03 / Services</p><h2 class="h2">Five services, built to work as <span class="serif">one connected system.</span></h2></div>
+        <p class="sh-r">None of these work on their own. We build the whole system, or we tell you we are not the right fit.</p>
+      </div>
+      <div class="svc-bento stg">
+        <article class="scell wide"><p class="sc-no">01 / Strategy-led websites</p><div><h3>The centre of everything</h3><p>Built around the way patients actually choose a provider, with messaging and booking flow shaped to turn a visitor into an enquiry.</p></div></article>
+        <article class="scell std"><p class="sc-no">02 / SEO</p><div><h3>Growth that compounds</h3><p>Service pages mapped to how patients search. Each year of work makes the next year's growth come faster.</p></div></article>
+        <article class="scell tri"><p class="sc-no">03 / Google Ads</p><div><h3>Reach at the moment of intent</h3><p>Compliant ad copy sent to pages built to convert, not burn budget.</p></div></article>
+        <article class="scell tri"><p class="sc-no">04 / Meta Ads</p><div><h3>Demand before the search</h3><p>Lead generation and awareness, inside what AHPRA allows in paid social.</p></div></article>
+        <article class="scell tri"><p class="sc-no">05 / Branding</p><div><h3>The first few seconds</h3><p>Identity and tone — one of the most underused levers in healthcare.</p></div></article>
+        <article class="scell feature"><div class="fg"></div><h3>One connected system, not five separate tactics.</h3><p>A website nobody can find does nothing. Paid search that lands on a weak page wastes money. Each service makes the others work harder.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section class="section" id="process">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="sh-l"><p class="sec-num">04 / How an engagement unfolds</p><h2 class="h2">Four stages over the first <span class="serif">twelve months.</span></h2></div>
+        <p class="sh-r">The compounding starts around month four.</p>
+      </div>
+      <div class="pbar stg">
+        <div class="pstep"><div class="ptrack"></div><div class="pfill" style="width:25%"></div><p class="pn">01 · Month 0</p><h3>Discovery call</h3><p>Fifteen minutes with Ryan. No preparation needed. We understand the practice and whether Adcraft is genuinely the right fit. If not, we say so.</p></div>
+        <div class="pstep"><div class="ptrack"></div><div class="pfill" style="width:50%"></div><p class="pn">02 · Month 1</p><h3>Audit &amp; strategy</h3><p>We audit the website, SEO, ad accounts and compliance language, then return a written strategy ordered by biggest lift in bookings first.</p></div>
+        <div class="pstep"><div class="ptrack"></div><div class="pfill" style="width:75%"></div><p class="pn">03 · Months 1–3</p><h3>Build</h3><p>Website, SEO foundations, ad accounts, brand work — whatever the strategy calls for. The foundation, built to last and to compound.</p></div>
+        <div class="pstep live"><div class="ptrack"></div><div class="pfill" style="width:100%"></div><p class="pn">04 · Month 4+</p><h3>Compound</h3><p>SEO and paid search start producing the lift in bookings. This is where the case-study results come from.</p><span class="badge">● Growth phase</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESULTS -->
+  <section class="section" id="results">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="sh-l"><p class="sec-num">05 / Results</p><h2 class="h2">What this has looked like <span class="serif">in practice.</span></h2></div>
+        <p class="sh-r">All of it produced inside AHPRA's advertising guidelines.</p>
+      </div>
+      <div class="dash stg">
+        <article class="dcard"><div class="dg"></div><p class="dl">King Street Dental &amp; Medical</p><div class="dnum">65,000+</div><p class="dd">patients per year, up from fewer than 1,000</p><p class="dn">We rebuilt the website around how patients choose a healthcare provider, then aligned SEO, compliance language, booking flow, service pages and email marketing as one connected system.</p></article>
+        <article class="dcard"><div class="dg"></div><p class="dl">Wollongong Diagnostics</p><div class="dnum">11.6×</div><p class="dd">growth in Google Search conversions / 3 years</p><p class="dn">Conversion actions grew from 1,356 to 15,752 per quarter. Most recent period: total leads up 114% YoY, Google Organic up 90%, Google Ads up 124%.</p></article>
+        <div class="dmini"><strong>+50%</strong><span>Average booking-conversion lift across healthcare clients, within the first six months.</span></div>
+        <div class="dwide"><p><b>Compliant by construction.</b> Every result above was produced inside AHPRA's advertising guidelines — not in spite of them, but because copy written for how patients decide performs better.</p></div>
+        <div class="logos"><span>King Street Dental &amp; Medical</span><span>Wollongong Diagnostics</span><span>Webdoctor Australia</span><span>eMed Specialist</span><span>Circulation Health</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SELECTED WORK -->
+  <section class="section" id="work">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="sh-l"><p class="sec-num">06 / Selected work</p><h2 class="h2">Practices and providers <span class="serif">we've grown.</span></h2></div>
+        <p class="sh-r">Websites, SEO, paid media and brand — built as one connected system, all inside AHPRA's guidelines.</p>
+      </div>
+      <div class="work-grid stg">
+        <a class="work-card" href="https://adcraftstudio.com.au/project/marketing-for-healthcare" target="_blank" rel="noopener"><div class="work-img"><img src="assets/portfolio/king-street-dental.webp" alt="King Street Dental & Medical — marketing for a Wollongong dental and medical practice" loading="lazy"></div><div class="work-meta"><p class="mono">Marketing · Healthcare</p><h3>King Street Dental &amp; Medical</h3></div></a>
+        <a class="work-card" href="https://adcraftstudio.com.au/project/marketing-for-radiology" target="_blank" rel="noopener"><div class="work-img"><img src="assets/portfolio/wd-imaging.webp" alt="WD Imaging Group — digital marketing for diagnostic imaging" loading="lazy"></div><div class="work-meta"><p class="mono">Web · Radiology</p><h3>WD Imaging Group</h3></div></a>
+        <a class="work-card" href="https://adcraftstudio.com.au/project/web-design-for-online-doctor" target="_blank" rel="noopener"><div class="work-img"><img src="assets/portfolio/webdoctor.webp" alt="WebDoctor — web design for an online healthcare platform" loading="lazy"></div><div class="work-meta"><p class="mono">Web · Healthcare</p><h3>WebDoctor</h3></div></a>
+        <a class="work-card" href="https://adcraftstudio.com.au/project/the-dance-clinic" target="_blank" rel="noopener"><div class="work-img"><img src="assets/portfolio/dance-clinic.webp" alt="The Dance Clinic — branding and web design for a physiotherapy clinic" loading="lazy"></div><div class="work-meta"><p class="mono">Branding · Physiotherapy</p><h3>The Dance Clinic</h3></div></a>
+        <a class="work-card" href="https://adcraftstudio.com.au/project/brand-design-marketing-for-ndis-provider" target="_blank" rel="noopener"><div class="work-img"><img src="assets/portfolio/solve-care.webp" alt="Solve Care — website and marketing for an NDIS provider" loading="lazy"></div><div class="work-meta"><p class="mono">Web · NDIS</p><h3>Solve Care</h3></div></a>
+        <a class="work-card" href="https://adcraftstudio.com.au/project/rebrand-and-web-design-for-commercial-real-estate" target="_blank" rel="noopener"><div class="work-img"><img src="assets/portfolio/comelli.webp" alt="Comelli — rebrand, web design and lead generation" loading="lazy"></div><div class="work-meta"><p class="mono">Rebrand · Real Estate</p><h3>Comelli</h3></div></a>
+        <a class="work-card" href="https://adcraftstudio.com.au/project/web-design-for-lawyers" target="_blank" rel="noopener"><div class="work-img"><img src="assets/portfolio/leonard-blake.webp" alt="Leonard Blake Legal — branding and web design for a Sydney law firm" loading="lazy"></div><div class="work-meta"><p class="mono">Branding · Legal</p><h3>Leonard Blake Legal</h3></div></a>
+        <a class="work-card" href="https://adcraftstudio.com.au/project/webdesign-for-cleaning-company" target="_blank" rel="noopener"><div class="work-img"><img src="assets/portfolio/cc-facilities.webp" alt="CC Facilities — brand and website transformation for a facilities provider" loading="lazy"></div><div class="work-meta"><p class="mono">Branding · Facilities</p><h3>CC Facilities</h3></div></a>
+        <a class="work-card" href="https://adcraftstudio.com.au/project/streamlined-energy" target="_blank" rel="noopener"><div class="work-img"><img src="assets/portfolio/streamlined-energy.webp" alt="Streamlined Energy — website redesign for an Australasian energy company" loading="lazy"></div><div class="work-meta"><p class="mono">Web · Energy</p><h3>Streamlined Energy</h3></div></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="cta" id="contact">
+    <div class="wrap">
+      <div class="cta-box rv">
+        <div class="cg"></div>
+        <div>
+          <p class="sec-num">07 / Where to go from here</p>
+          <h2>The most useful next step is a <span class="serif">fifteen-minute conversation.</span></h2>
+          <p>A call with Ryan is a conversation, with no obligation attached to it and no preparation needed on your side. The purpose is to understand what is happening at the practice and whether Adcraft is the right fit for where it wants to go.</p>
+          <a href="mailto:enquiries@adcraftstudio.com.au" class="btn">Book a call with Ryan <span class="arw">↗</span></a>
+        </div>
+        <div class="ryan">
+          <img src="https://cdn.prod.website-files.com/68d35b742e1dd12ea5dc12ae/6a2e1865b835d8b66970b848_Ryan%20Dalle-Nogare%2C%20Managing%20Director%20of%20Adcraft%20Studio%20in%20Wollongong.jpg" alt="Ryan Dalle-Nogare, Managing Director of Adcraft Studio" loading="lazy">
+          <div><div class="rn">Ryan Dalle-Nogare</div><div class="rm">Managing Director</div><div class="rm">Adcraft Studio</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="foot-top">
+      <img src="assets/adcraft-logo.svg" class="logo-img foot-logo" alt="Adcraft Studio">
+      <div class="foot-contact">Level 1, 17 Flinders Street, Wollongong NSW 2500<br>enquiries@adcraftstudio.com.au · 04 2437 5459</div>
+    </div>
+    <p class="foot-legal">© 2026 Adcraft Studio. All rights reserved. ABN 31 651 899 731.</p>
+    <p class="foot-disc">Adcraft Studio is a digital marketing and creative agency based in Wollongong, working with healthcare practices across Australia. Marketing work for regulated health services is delivered in line with AHPRA's Guidelines for advertising a regulated health service. Practices remain responsible for ensuring final compliance.</p>
+  </div>
+</footer>
+
+<script src="assets/lenis.min.js"></script>
+<script>
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+// smooth momentum scroll — the same feel as adcraftstudio.com.au (Lenis)
+let lenis=null;
+if(window.Lenis){
+  const ls=document.createElement('style');
+  ls.textContent='html.lenis,html.lenis body{height:auto}.lenis.lenis-smooth{scroll-behavior:auto!important}.lenis.lenis-stopped{overflow:hidden}';
+  document.head.appendChild(ls);
+  lenis=new Lenis({duration:1.15,easing:t=>Math.min(1,1.001-Math.pow(2,-10*t)),smoothWheel:true});
+  const raf=(t)=>{lenis.raf(t);requestAnimationFrame(raf)};requestAnimationFrame(raf);
+}
+// scroll reveal
+const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.14,rootMargin:'0px 0px -7% 0px'});
+document.querySelectorAll('.rv,.stg').forEach(el=>io.observe(el));
+// image parallax on scroll
+const px=[...document.querySelectorAll('[data-parallax]')];
+const updatePx=()=>{const vh=innerHeight;px.forEach(el=>{const r=el.getBoundingClientRect();const off=(r.top+r.height/2-vh/2)/vh;const f=parseFloat(el.dataset.parallax)||.1;el.style.transform='translate3d(0,'+(-off*f*100).toFixed(2)+'px,0)';});};
+// scroll-aware nav + parallax
+const nav=document.getElementById('nav');
+const onScroll=()=>{nav.classList.toggle('scrolled',(lenis?lenis.scroll:window.scrollY)>20);updatePx();};
+if(lenis)lenis.on('scroll',onScroll);addEventListener('scroll',onScroll,{passive:true});onScroll();
+// smooth anchor links
+document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{const id=a.getAttribute('href');if(id.length>1){const t=document.querySelector(id);if(t){e.preventDefault();lenis?lenis.scrollTo(t,{offset:-72}):t.scrollIntoView({behavior:'smooth'});}}}));
+// mobile menu
+const burger=document.getElementById('burger'),mm=document.getElementById('mobileMenu');
+const toggleMenu=(open)=>{const o=open??!burger.classList.contains('open');burger.classList.toggle('open',o);mm.classList.toggle('open',o);burger.setAttribute('aria-expanded',o);document.body.style.overflow=o?'hidden':'';if(lenis)o?lenis.stop():lenis.start();};
+burger.addEventListener('click',()=>toggleMenu());
+mm.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>toggleMenu(false)));
+// active link highlight
+const links=[...document.querySelectorAll('.nav-links a')];
+const secObs=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){links.forEach(l=>l.classList.toggle('active',l.getAttribute('href')==='#'+e.target.id))}})},{rootMargin:'-45% 0px -50% 0px'});
+['difference','services','process','results'].forEach(id=>{const s=document.getElementById(id);if(s)secObs.observe(s)});
+</script>
+</body>
+</html>

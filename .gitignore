@@ -1,0 +1,6 @@
+# Ignore everything at the project root...
+/*
+# ...except the actual website files:
+!/.gitignore
+!/*.html
+!/assets/
