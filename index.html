@@ -32,6 +32,7 @@ img{display:block;max-width:100%}
 .eyebrow::before{content:'';width:1.8rem;height:1px;background:var(--t2);display:inline-block}
 .serif{font-family:var(--serif);font-weight:400;font-style:italic;letter-spacing:0}
 
+.scroll-prog{position:fixed;top:0;left:0;height:3px;width:0;z-index:200;background:url('assets/brand-gradient.jpg') left center/cover;box-shadow:0 0 12px rgba(255,140,80,.45);pointer-events:none}
 /* ============ NAV ============ */
 .nav{position:fixed;inset:0 0 auto;z-index:60;background:transparent;border-bottom:1px solid transparent;transition:background .4s var(--ease),border-color .4s,backdrop-filter .4s}
 .nav.scrolled{background:rgba(5,5,5,.7);backdrop-filter:blur(18px) saturate(1.3);border-bottom:1px solid var(--line2)}
@@ -167,17 +168,25 @@ img{display:block;max-width:100%}
 @media(max-width:820px){.diff-layout{grid-template-columns:1fr;gap:2.4rem}}
 
 /* PROBLEM – paper, two refined panels */
-.compare{display:grid;grid-template-columns:1fr 1fr;gap:1.4rem;margin-top:.5rem}
-.cpanel{border:1px solid var(--line-d);border-radius:18px;padding:2.2rem;background:var(--white)}
-.cpanel.dim{background:transparent;border-style:dashed}
-.cpanel-h{display:flex;align-items:center;justify-content:space-between;padding-bottom:1.5rem;margin-bottom:.5rem;border-bottom:1px solid var(--line-d2)}
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:1.6rem;margin-top:.5rem;align-items:start}
+.cpanel{position:relative;border:1px solid var(--line-d);border-radius:20px;padding:2.2rem 2.2rem 2.4rem;background:var(--white);overflow:hidden;transition:transform .5s var(--ease),box-shadow .5s var(--ease)}
+.cpanel.dim{background:rgba(5,5,5,.015);border-style:dashed}
+.cpanel:not(.dim){box-shadow:0 26px 60px rgba(5,5,5,.07)}
+.cpanel:not(.dim)::before{content:'';position:absolute;inset:0 0 auto 0;height:3px;background:url('assets/brand-gradient.jpg') center/cover}
+.cpanel:not(.dim):hover{transform:translateY(-5px);box-shadow:0 38px 84px rgba(5,5,5,.11)}
+.cpanel-h{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding-bottom:1.4rem;margin-bottom:.4rem;border-bottom:1px solid var(--line-d2)}
 .cpanel-h .ph{font-family:var(--mono);font-size:.64rem;letter-spacing:.13em;text-transform:uppercase;color:var(--ink3)}
-.cpanel-h .px{font-family:var(--mono);font-size:.64rem;letter-spacing:.08em}
-.cpanel.dim .px{color:#b4493a}.cpanel .px{color:#3f7d4f}
-.crow{padding:1.4rem 0;border-bottom:1px solid var(--line-d2)}
+.cpanel-h .px{font-family:var(--mono);font-size:.6rem;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap;padding:.32rem .62rem;border-radius:99px}
+.cpanel.dim .px{color:#b4493a;background:rgba(180,73,58,.1)}.cpanel:not(.dim) .px{color:#3f7d4f;background:rgba(63,125,79,.12)}
+.crow{padding:1.3rem 0;border-bottom:1px solid var(--line-d2);transition:transform .35s var(--ease)}
 .crow:last-child{border-bottom:0;padding-bottom:0}
-.crow h4{font-size:1.02rem;font-weight:650;letter-spacing:-.02em;margin-bottom:.45rem;color:var(--ink)}
-.crow p{font-size:.92rem;color:var(--ink2);line-height:1.55}
+.cpanel:not(.dim) .crow:hover{transform:translateX(5px)}
+.crow h4{position:relative;padding-left:2rem;font-size:1.02rem;font-weight:650;letter-spacing:-.02em;margin-bottom:.45rem;color:var(--ink)}
+.crow h4::before{position:absolute;left:0;top:-.02rem;width:1.4rem;height:1.4rem;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:700;line-height:1}
+.cpanel.dim .crow h4::before{content:'✕';color:#c0503f;background:rgba(192,80,63,.12)}
+.cpanel:not(.dim) .crow h4::before{content:'✓';color:#3f7d4f;background:rgba(63,125,79,.14)}
+.crow p{font-size:.92rem;color:var(--ink2);line-height:1.55;padding-left:2rem}
+.cpanel.dim .crow h4,.cpanel.dim .crow p{opacity:.85}
 .intro-line{font-size:clamp(1.1rem,1rem + .6vw,1.4rem);line-height:1.4;max-width:54ch;margin:-1rem 0 2.4rem;color:var(--ink)}
 .intro-line .serif{color:var(--ink)}
 @media(max-width:780px){.compare{grid-template-columns:1fr}.cpanel{padding:1.7rem}}
@@ -719,6 +728,10 @@ if(matchMedia('(pointer:fine)').matches){
   var cio=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){var o=cs.filter(function(x){return x.el===en.target;})[0];if(o)run(o);cio.unobserve(en.target);}})},{threshold:.4});
   cs.forEach(function(o){cio.observe(o.el);});
 })();
+// magnetic pull on primary CTA buttons (award-site interaction)
+if(matchMedia('(pointer:fine)').matches){document.querySelectorAll('.btn').forEach(function(b){b.addEventListener('mousemove',function(e){var r=b.getBoundingClientRect();b.style.transform='translate('+((e.clientX-r.left-r.width/2)*0.28).toFixed(1)+'px,'+((e.clientY-r.top-r.height/2)*0.4).toFixed(1)+'px)';});b.addEventListener('mouseleave',function(){b.style.transform='';});});}
+// scroll progress bar
+(function(){var bar=document.createElement('div');bar.className='scroll-prog';document.body.appendChild(bar);function upd(){var h=document.documentElement.scrollHeight-innerHeight,pr=h>0?scrollY/h:0;bar.style.width=(pr*100).toFixed(2)+'%';}addEventListener('scroll',upd,{passive:true});upd();})();
 </script>
 </body>
 </html>

@@ -45,3 +45,6 @@ document.addEventListener('DOMContentLoaded',function(){
     mm.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){toggleMenu(false);});});
   }
 });
+
+// scroll progress bar
+(function(){var bar=document.createElement('div');bar.className='scroll-prog';document.body.appendChild(bar);function upd(){var h=document.documentElement.scrollHeight-innerHeight,pr=h>0?scrollY/h:0;bar.style.width=(pr*100).toFixed(2)+'%';}addEventListener('scroll',upd,{passive:true});upd();})();
