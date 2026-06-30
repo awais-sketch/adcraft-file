@@ -99,6 +99,14 @@ img{display:block;max-width:100%}
 /* glass stats card */
 .hero-visual{position:relative}
 .glass{position:relative;border:1px solid rgba(244,241,236,.16);border-radius:24px;background:linear-gradient(155deg,rgba(244,241,236,.085),rgba(244,241,236,.02));backdrop-filter:blur(22px) saturate(1.3);padding:1.9rem;box-shadow:0 50px 110px rgba(0,0,0,.55),inset 0 1px 0 rgba(244,241,236,.12);animation:floaty 7s ease-in-out infinite}
+/* VengenceUI-style: animated gradient border on the glass card */
+@property --ga{syntax:'<angle>';initial-value:0deg;inherits:false}
+.glass::before{content:'';position:absolute;inset:-1px;border-radius:inherit;padding:1px;background:conic-gradient(from var(--ga,0deg),transparent 0deg,rgba(95,165,255,.7) 55deg,rgba(255,138,61,.55) 140deg,rgba(255,61,140,.6) 210deg,transparent 300deg);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;animation:glassBorder 7s linear infinite;pointer-events:none}
+@keyframes glassBorder{to{--ga:360deg}}
+/* shine sweep across buttons on hover */
+.btn,.sg-btn,.nav-cta{position:relative;overflow:hidden}
+.btn::before,.sg-btn::before,.nav-cta::before{content:'';position:absolute;top:0;bottom:0;left:-130%;width:55%;background:linear-gradient(105deg,transparent,rgba(255,255,255,.6),transparent);transform:skewX(-18deg);transition:left .65s var(--ease);pointer-events:none;z-index:0}
+.btn:hover::before,.sg-btn:hover::before,.nav-cta:hover::before{left:140%}
 @keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
 .glass-stat{display:flex;align-items:flex-start;gap:1rem;padding-bottom:1.5rem;border-bottom:1px solid var(--line2)}
 .glass-ic{width:2.7rem;height:2.7rem;border-radius:12px;border:1px solid var(--line);background:rgba(244,241,236,.05);display:flex;align-items:center;justify-content:center;flex:none}
@@ -276,6 +284,26 @@ html.anim-ready .work-card.shown .work-img img{clip-path:inset(0 0 0 0);transiti
 .work-card,.team-card,.studio-strip figure{position:relative}
 .work-card::after,.team-card::after,.studio-strip figure::after{content:'';position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:0;z-index:5;transition:opacity .5s var(--ease);background:radial-gradient(260px circle at var(--mx,50%) var(--my,50%),rgba(255,255,255,.13),transparent 60%)}
 .work-card:hover::after,.team-card:hover::after,.studio-strip figure:hover::after{opacity:1}
+/* photoshoot gallery */
+.sg-teaser{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+.sg-teaser figure{margin:0;border-radius:16px;overflow:hidden;border:1px solid var(--line);aspect-ratio:3/2}
+.sg-teaser img{width:100%;height:100%;object-fit:cover;transition:transform .7s var(--ease);filter:saturate(.97)}
+.sg-teaser figure:hover img{transform:scale(1.05)}
+.sg-full{columns:4;column-gap:1rem;margin-top:1rem}
+.sg-full[hidden]{display:none}
+.sg-full figure{margin:0 0 1rem;border-radius:14px;overflow:hidden;border:1px solid var(--line);break-inside:avoid}
+.sg-full img{width:100%;display:block;transition:transform .7s var(--ease);filter:saturate(.97)}
+.sg-full figure:hover img{transform:scale(1.04)}
+.sg-cta{display:flex;justify-content:center;margin-top:2.4rem}
+.sg-btn{display:inline-flex;align-items:center;gap:.7rem;background:var(--paper);color:var(--black);border:0;border-radius:11px;font-family:var(--sans);font-weight:600;font-size:.92rem;padding:.92rem 1.7rem;cursor:pointer;transition:transform .3s var(--ease),box-shadow .3s}
+.sg-btn:hover{transform:translateY(-2px);box-shadow:0 16px 40px rgba(245,200,150,.2)}
+.sg-btn .sg-n{font-family:var(--mono);font-size:.7rem;text-transform:uppercase;letter-spacing:.1em;opacity:.55}
+.sg-btn .arw{transition:transform .3s var(--ease)}.sg-btn:hover .arw{transform:translate(2px,-2px)}
+.sg-teaser figure,.sg-full figure{position:relative}
+.sg-teaser figure::after,.sg-full figure::after{content:'';position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:0;z-index:5;transition:opacity .5s var(--ease);background:radial-gradient(240px circle at var(--mx,50%) var(--my,50%),rgba(255,255,255,.13),transparent 60%)}
+.sg-teaser figure:hover::after,.sg-full figure:hover::after{opacity:1}
+@media(max-width:820px){.sg-full{columns:2}}
+@media(max-width:560px){.sg-teaser{grid-template-columns:1fr}.sg-full{columns:1}}
 
 /* ============ MOTION ============ */
 @keyframes introUp{0%{opacity:0;transform:translateY(24px)}100%{opacity:1;transform:none}}
@@ -547,6 +575,58 @@ html.anim-ready .stg.in>*:nth-child(4){transition-delay:.24s}html.anim-ready .st
     </div>
   </section>
 
+  <!-- PHOTOSHOOT GALLERY -->
+  <section class="section" id="gallery">
+    <div class="wrap">
+      <div class="shead">
+        <div>
+          <p class="snum"><em>08</em> / The photoshoot</p>
+          <h2 class="h2 rv">Inside the studio, <span class="serif">up close.</span></h2>
+        </div>
+        <p class="slead rv" style="transition-delay:.08s">The team, the space, the day we shot it all — a closer look at the people behind the work.</p>
+      </div>
+      <div class="sg-teaser stg">
+        <figure><img src="assets/gallery/g12.webp" alt="The Adcraft team in the Wollongong studio" loading="lazy"></figure>
+        <figure><img src="assets/gallery/g1.webp" alt="The Adcraft team in the Wollongong studio" loading="lazy"></figure>
+        <figure><img src="assets/gallery/g20.webp" alt="The Adcraft team in the Wollongong studio" loading="lazy"></figure>
+      </div>
+      <div class="sg-full" id="sgFull" hidden>
+        <figure><img src="assets/gallery/g2.webp" alt="Adcraft studio photoshoot, Wollongong" loading="lazy"></figure>
+        <figure><img src="assets/gallery/g3.webp" alt="Adcraft studio photoshoot, Wollongong" loading="lazy"></figure>
+        <figure><img src="assets/gallery/g4.webp" alt="Adcraft studio photoshoot, Wollongong" loading="lazy"></figure>
+        <figure><img src="assets/gallery/g5.webp" alt="Adcraft studio photoshoot, Wollongong" loading="lazy"></figure>
+        <figure><img src="assets/gallery/g6.webp" alt="Adcraft studio photoshoot, Wollongong" loading="lazy"></figure>
+        <figure><img src="assets/gallery/g7.webp" alt="Adcraft studio photoshoot, Wollongong" loading="lazy"></figure>
+        <figure><img src="assets/gallery/g8.webp" alt="Adcraft studio photoshoot, Wollongong" loading="lazy"></figure>
+        <figure><img src="assets/gallery/g9.webp" alt="Adcraft studio photoshoot, Wollongong" loading="lazy"></figure>
+        <figure><img src="assets/gallery/g10.webp" alt="Adcraft studio photoshoot, Wollongong" loading="lazy"></figure>
+        <figure><img src="assets/gallery/g11.webp" alt="Adcraft studio photoshoot, Wollongong" loading="lazy"></figure>
+        <figure><img src="assets/gallery/g13.webp" alt="Adcraft studio photoshoot, Wollongong" loading="lazy"></figure>
+        <figure><img src="assets/gallery/g14.webp" alt="Adcraft studio photoshoot, Wollongong" loading="lazy"></figure>
+        <figure><img src="assets/gallery/g15.webp" alt="Adcraft studio photoshoot, Wollongong" loading="lazy"></figure>
+        <figure><img src="assets/gallery/g16.webp" alt="Adcraft studio photoshoot, Wollongong" loading="lazy"></figure>
+        <figure><img src="assets/gallery/g17.webp" alt="Adcraft studio photoshoot, Wollongong" loading="lazy"></figure>
+        <figure><img src="assets/gallery/g18.webp" alt="Adcraft studio photoshoot, Wollongong" loading="lazy"></figure>
+        <figure><img src="assets/gallery/g19.webp" alt="Adcraft studio photoshoot, Wollongong" loading="lazy"></figure>
+        <figure><img src="assets/gallery/g21.webp" alt="Adcraft studio photoshoot, Wollongong" loading="lazy"></figure>
+        <figure><img src="assets/gallery/g22.webp" alt="Adcraft studio photoshoot, Wollongong" loading="lazy"></figure>
+        <figure><img src="assets/gallery/g23.webp" alt="Adcraft studio photoshoot, Wollongong" loading="lazy"></figure>
+        <figure><img src="assets/gallery/g24.webp" alt="Adcraft studio photoshoot, Wollongong" loading="lazy"></figure>
+        <figure><img src="assets/gallery/g25.webp" alt="Adcraft studio photoshoot, Wollongong" loading="lazy"></figure>
+        <figure><img src="assets/gallery/g26.webp" alt="Adcraft studio photoshoot, Wollongong" loading="lazy"></figure>
+        <figure><img src="assets/gallery/g27.webp" alt="Adcraft studio photoshoot, Wollongong" loading="lazy"></figure>
+        <figure><img src="assets/gallery/g28.webp" alt="Adcraft studio photoshoot, Wollongong" loading="lazy"></figure>
+        <figure><img src="assets/gallery/g29.webp" alt="Adcraft studio photoshoot, Wollongong" loading="lazy"></figure>
+        <figure><img src="assets/gallery/g30.webp" alt="Adcraft studio photoshoot, Wollongong" loading="lazy"></figure>
+        <figure><img src="assets/gallery/g31.webp" alt="Adcraft studio photoshoot, Wollongong" loading="lazy"></figure>
+        <figure><img src="assets/gallery/g32.webp" alt="Adcraft studio photoshoot, Wollongong" loading="lazy"></figure>
+      </div>
+      <div class="sg-cta">
+        <button class="sg-btn" id="sgBtn" aria-expanded="false">View the full gallery <span class="sg-n">32 photos</span> <span class="arw">↗</span></button>
+      </div>
+    </div>
+  </section>
+
   <!-- FINAL CTA -->
   <section class="cta" id="contact">
     <div class="cta-glow"></div>
@@ -618,7 +698,7 @@ burger.addEventListener('click',()=>toggleMenu());
 mm.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>toggleMenu(false)));
 // 3D tilt + cursor spotlight on image cards (desktop only, subtle premium feel)
 if(matchMedia('(pointer:fine)').matches){
-  document.querySelectorAll('.work-card,.team-card,.studio-strip figure').forEach(function(c){
+  document.querySelectorAll('.work-card,.team-card,.studio-strip figure,.sg-teaser figure,.sg-full figure').forEach(function(c){
     c.addEventListener('mouseenter',function(){c.style.transition='transform .14s ease-out';});
     c.addEventListener('mousemove',function(e){
       var r=c.getBoundingClientRect(),mx=(e.clientX-r.left)/r.width,my=(e.clientY-r.top)/r.height;
@@ -628,6 +708,17 @@ if(matchMedia('(pointer:fine)').matches){
     c.addEventListener('mouseleave',function(){c.style.transition='transform .55s var(--ease)';c.style.transform='';});
   });
 }
+// photoshoot gallery — reveal full set on click
+(function(){var b=document.getElementById('sgBtn'),f=document.getElementById('sgFull');if(b&&f){b.addEventListener('click',function(){f.hidden=false;b.style.display='none';dispatchEvent(new Event('resize'));});}})();
+// stat counters — numbers count up when they scroll into view (VengenceUI-style)
+(function(){
+  function setup(el){var raw=el.textContent.trim();var m=raw.match(/^([^0-9-]*)(-?[0-9.,]+)(.*)$/);if(!m||!/[0-9]/.test(m[2]))return null;var num=m[2],hc=num.indexOf(',')>-1,cl=num.replace(/,/g,''),d=(cl.split('.')[1]||'').length,t=parseFloat(cl);if(isNaN(t))return null;return {el:el,t:t,d:d,hc:hc,p:m[1],s:m[3],raw:raw};}
+  function fmt(v,o){var s=v.toFixed(o.d);if(o.hc){var q=s.split('.');q[0]=q[0].replace(/\B(?=([0-9]{3})+(?![0-9]))/g,',');s=q.join('.');}return o.p+s+o.s;}
+  var cs=[].slice.call(document.querySelectorAll('.glass-stat b,.glass-bar-top b,.glass-grid b,.rcard .rnum')).map(setup).filter(Boolean);
+  function run(o){var t0=null;function step(ts){if(t0===null)t0=ts;var p=Math.min(1,(ts-t0)/1400),e=1-Math.pow(1-p,3);o.el.textContent=fmt(o.t*e,o);if(p<1)requestAnimationFrame(step);else o.el.textContent=o.raw;}requestAnimationFrame(step);}
+  var cio=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){var o=cs.filter(function(x){return x.el===en.target;})[0];if(o)run(o);cio.unobserve(en.target);}})},{threshold:.4});
+  cs.forEach(function(o){cio.observe(o.el);});
+})();
 </script>
 </body>
 </html>
