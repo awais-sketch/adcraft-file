@@ -48,3 +48,6 @@ document.addEventListener('DOMContentLoaded',function(){
 
 // scroll progress bar
 (function(){var bar=document.createElement('div');bar.className='scroll-prog';document.body.appendChild(bar);function upd(){var h=document.documentElement.scrollHeight-innerHeight,pr=h>0?scrollY/h:0;bar.style.width=(pr*100).toFixed(2)+'%';}addEventListener('scroll',upd,{passive:true});upd();})();
+
+// magnetic pull on primary CTA buttons (sub-pages)
+if(matchMedia('(pointer:fine)').matches){document.querySelectorAll('.btn').forEach(function(b){b.addEventListener('mousemove',function(e){var r=b.getBoundingClientRect();b.style.transform='translate('+((e.clientX-r.left-r.width/2)*0.28).toFixed(1)+'px,'+((e.clientY-r.top-r.height/2)*0.4).toFixed(1)+'px)';});b.addEventListener('mouseleave',function(){b.style.transform='';});});}

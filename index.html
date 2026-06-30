@@ -66,7 +66,8 @@ img{display:block;max-width:100%}
 
 /* ============ HERO – glass trust ============ */
 .hero{position:relative;padding:9rem 0 4.5rem;overflow:hidden}
-.hero-photo{position:absolute;inset:0;z-index:0;pointer-events:none;background:url('assets/growth-bg.webp') center/cover;filter:saturate(1.08)}
+.hero-photo{position:absolute;inset:0;z-index:0;pointer-events:none;background:url('assets/growth-bg.webp') center/cover;filter:saturate(1.08);animation:heroPan linear both;animation-timeline:view();animation-range:cover}
+@keyframes heroPan{from{transform:scale(1.04) translateY(-1%)}to{transform:scale(1.14) translateY(2%)}}
 .hero-photo::after{content:'';position:absolute;inset:0;background:linear-gradient(98deg,rgba(5,5,5,.95) 0%,rgba(5,5,5,.72) 42%,rgba(5,5,5,.4) 78%,rgba(5,5,5,.56) 100%),linear-gradient(to bottom,rgba(5,5,5,.5) 0%,rgba(5,5,5,0) 30%,rgba(5,5,5,.94) 100%)}
 @media(max-width:760px){.hero-photo::after{background:linear-gradient(180deg,rgba(5,5,5,.82) 0%,rgba(5,5,5,.64) 40%,rgba(5,5,5,.9) 100%)}}
 .hero-bg{position:absolute;inset:0;z-index:0;pointer-events:none;background-image:linear-gradient(var(--line2) 1px,transparent 1px),linear-gradient(90deg,var(--line2) 1px,transparent 1px);background-size:62px 62px;-webkit-mask-image:radial-gradient(135% 95% at 70% 8%,#000 22%,transparent 72%);mask-image:radial-gradient(135% 95% at 70% 8%,#000 22%,transparent 72%)}
@@ -454,13 +455,13 @@ html.anim-ready .stg.in>*:nth-child(4){transition-delay:.24s}html.anim-ready .st
         <p class="slead rv" style="transition-delay:.08s">A patient forms an impression within thirty seconds. The website is either helping it form, or working against it.</p>
       </div>
       <div class="compare">
-        <div class="cpanel dim rv">
+        <div class="cpanel dim stg">
           <div class="cpanel-h"><span class="ph">Most healthcare websites</span><span class="px">✕ working against it</span></div>
           <div class="crow"><h4>Sound clinical in the wrong way</h4><p>Technical and list-heavy, as if patients are reading a service catalogue. The practice's personality disappears into the formatting.</p></div>
           <div class="crow"><h4>Treat AHPRA as a reason to say nothing</h4><p>The regulation becomes an excuse for copy that is flat, cautious and interchangeable. AHPRA does not require that.</p></div>
           <div class="crow"><h4>Create friction in the booking path</h4><p>A form that asks too much. A calendar that hides availability. A system that pulls the patient away when they are ready to act.</p></div>
         </div>
-        <div class="cpanel rv" style="transition-delay:.1s">
+        <div class="cpanel stg" style="transition-delay:.1s">
           <div class="cpanel-h"><span class="ph">A well-built healthcare website</span><span class="px">✓ helping it form</span></div>
           <div class="crow"><h4>Speaks to people, inside the limits</h4><p>Real room within the guidelines to communicate the practice's values, the care it offers and the experience patients can expect.</p></div>
           <div class="crow"><h4>Makes the trust cues visible early</h4><p>How the team is introduced, how credentials are presented – telling a patient within thirty seconds this is a serious practice.</p></div>
